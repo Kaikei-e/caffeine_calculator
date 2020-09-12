@@ -29,7 +29,8 @@ def calculator(caffeine):
 
         if caffeine < 5:
             break
-    return time_list, caffeine_list 
+    return time_list, caffeine_list
+
 
 returned_list = calculator(R_c_l)
 
