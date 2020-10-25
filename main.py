@@ -1,9 +1,9 @@
 import matplotlib.pyplot as ppt
 
 
-
-drink_amount = 355
-caffe_per_100ml = 40
+s = input().rstrip().split()
+drink_amount = int(s[0])
+caffe_per_100ml = int(s[1])
 Residual_caffeine_level = drink_amount * caffe_per_100ml / 100
 # Residual_caffeine_level = input()
 
