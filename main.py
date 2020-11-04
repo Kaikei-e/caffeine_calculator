@@ -1,6 +1,8 @@
 import matplotlib.pyplot as ppt
 
 
+print("Enter first the amount of the drink and then the amount of caffeine per 100 mg, separated by a space")
+
 s = input().rstrip().split()
 drink_amount = int(s[0])
 caffe_per_100ml = int(s[1])
@@ -20,16 +22,17 @@ def calculator(caffeine):
     caffeine_list = []
     
     for i in range(caffeine):
-        time_local += 6
-        caffeine -= caffeine / 2
-
         time_list.append([time_local])
         caffeine_list.append([caffeine])
+
+        time_local += 6
+        caffeine -= caffeine / 2
 
 
         if caffeine < 5:
             break
     return time_list, caffeine_list
+
 
 
 returned_list = calculator(R_c_l)
@@ -38,5 +41,4 @@ returned_list = calculator(R_c_l)
 print(returned_list[0])
 print(returned_list[1])
 
-ppt.plot(returned_list[0], returned_list[1], '.')
-
+ppt.plot(returned_list[0], returned_list[1])
