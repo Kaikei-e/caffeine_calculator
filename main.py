@@ -59,6 +59,8 @@ returned_list = calculator(R_c_l)
 print(returned_list[0])
 print(returned_list[1])
 
+ppt.xlabel("Hour")
+ppt.ylabel("Caffeine")
 ppt.grid()
 ppt.plot(returned_list[0], returned_list[1])
 
