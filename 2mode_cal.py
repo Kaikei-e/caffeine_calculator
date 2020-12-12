@@ -147,7 +147,7 @@ elif selected_mode == 2:
 print(returned_list[0])
 print(returned_list[1])
 
-ppt.xlabel("Hour")
-ppt.ylabel("Caffeine")
+ppt.xlabel("Time(h)")
+ppt.ylabel("Caffeine(mg)")
 ppt.grid()
 ppt.plot(returned_list[0], returned_list[1])
