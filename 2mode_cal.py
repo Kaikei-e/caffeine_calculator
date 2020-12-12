@@ -22,7 +22,7 @@ def mode_excp_handler():
         except:
             print(" An exception occurred.\nPlease enter 1 or 2.")
 
-def value_excp_handler1(s):
+def value_excp_handler1():
     flag_value = True
 
     while flag_value == True:
@@ -36,17 +36,21 @@ def value_excp_handler1(s):
         except:
             print("Please enter a number, not a string.")
 
-def value_excp_handler2(s):
+    return s
+
+def value_excp_handler2():
     flag_value = True
 
     while flag_value == True:
-        print(mode1_statement)
+        print(mode2_statement)
         s = input()
         try:
             s = float(s)
             flag_value = False
         except:
             print("Please enter a number, not a string.")
+
+    return s
 
 def calculator1(caffeine):
         time_local = time_global
@@ -95,15 +99,14 @@ if selected_mode == 1:
 
     Mode 1
     """
-    print(mode1_statement)
-
-    s = input().rstrip().split()
+    #print(mode1_statement)
 
     ##############
-    value_excp_handler1(s)
+    inputs = []
+    inputs = value_excp_handler1()
 
-    drink_amount = float(s[0])
-    caffe_per_100ml = float(s[1])
+    drink_amount = float(inputs[0])
+    caffe_per_100ml = float(inputs[1])
     Residual_caffeine_level = drink_amount * caffe_per_100ml / 100
 
     time_global = 0
@@ -124,11 +127,10 @@ elif selected_mode == 2:
     """
     Mode 2
     """
-    print(mode2_statement)
-    s = input()
-    value_excp_handler2(s)
+    
+    value = value_excp_handler2()
     ##############
-    total_caffeine = float(s)
+    total_caffeine = float(value)
     Residual_caffeine_level = total_caffeine
     # Residual_caffeine_level = input()
 
