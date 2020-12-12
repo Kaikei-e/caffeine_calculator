@@ -1,22 +1,89 @@
 import matplotlib.pyplot as ppt
 
 mode_statement = "Please select a calculation method. Mode 1 is calculated by the amount of caffeine per 100ml, Mode 2 is calculated by the total amount of the caffeine.\n Choose 1 or 2."
+mode1_statement = "Enter first the amount of the drink and then the amount of caffeine per 100 ml, separated by a space"
+mode2_statement = "Enter the total caffeine content of the drink."
 
-flag = True
+selected_mode = None
 
-while flag == True:
+
+def mode_excp_handler():
+    flag_mode = True
+    global selected_mode
+
     print(mode_statement)
-    try:
-        selected_mode = int(input())
-    except:
-        print("Please enter 1 or 2.\n An exception occurred")
-    else:
-        flag = False
+    while flag_mode == True:
+        try:
+            selected_mode = int(input())
+            if selected_mode < 1 or selected_mode > 2:
+                print("Please enter 1 or 2")
+            elif selected_mode == 1 or selected_mode == 2:
+                flag_mode = False
+        except:
+            print(" An exception occurred.\nPlease enter 1 or 2.")
 
-if selected_mode < 1 or selected_mode > 2:
-    print("Please enter 1 or 2")
-    selected_mode = input()
+def value_excp_handler1(s):
+    flag_value = True
 
+    while flag_value == True:
+        print(mode1_statement)
+        s = input().rstrip().split()
+
+        try:
+            s[0] = float(s[0])
+            s[1] = float(s[1])
+            flag_value = False
+        except:
+            print("Please enter a number, not a string.")
+
+def value_excp_handler2(s):
+    flag_value = True
+
+    while flag_value == True:
+        print(mode1_statement)
+        s = input()
+        try:
+            s = float(s)
+            flag_value = False
+        except:
+            print("Please enter a number, not a string.")
+
+def calculator1(caffeine):
+        time_local = time_global
+        time_list = []
+        caffeine_list = []
+        
+        for i in range(caffeine):
+            time_list.append([time_local])
+            caffeine_list.append([caffeine])
+
+            time_local += 6
+            caffeine -= caffeine / 2
+
+
+            if caffeine < 5:
+                break
+        return time_list, caffeine_list
+
+def calculator2(caffeine):
+        time_local = time_global
+        time_list = []
+        caffeine_list = []
+        
+        for i in range(caffeine):
+            time_list.append([time_local])
+            caffeine_list.append([caffeine])
+
+            time_local += 6
+            caffeine -= caffeine / 2
+
+
+            if caffeine < 5:
+                break
+        return time_list, caffeine_list
+
+
+mode_excp_handler()
 
 """ 
 Mode branching
@@ -28,14 +95,16 @@ if selected_mode == 1:
 
     Mode 1
     """
-
-    print("Enter first the amount of the drink and then the amount of caffeine per 100 ml, separated by a space")
+    print(mode1_statement)
 
     s = input().rstrip().split()
+
+    ##############
+    value_excp_handler1(s)
+
     drink_amount = float(s[0])
     caffe_per_100ml = float(s[1])
     Residual_caffeine_level = drink_amount * caffe_per_100ml / 100
-    # Residual_caffeine_level = input()
 
     time_global = 0
 
@@ -44,31 +113,21 @@ if selected_mode == 1:
     except ValueError:
         print('不正な値が入力されました: Invalid values entered.')
 
-    def calculator1(caffeine):
-        time_local = time_global
-        time_list = []
-        caffeine_list = []
-        
-        for i in range(caffeine):
-            time_list.append([time_local])
-            caffeine_list.append([caffeine])
+    returned_list = calculator1(R_c_l)
+    
 
-            time_local += 6
-            caffeine -= caffeine / 2
+    
 
 
-            if caffeine < 5:
-                break
-        return time_list, caffeine_list
-
-
-else:
+elif selected_mode == 2:
 
     """
     Mode 2
     """
-    print("Enter the total caffeine content of the drink.")
+    print(mode2_statement)
     s = input()
+    value_excp_handler2(s)
+    ##############
     total_caffeine = float(s)
     Residual_caffeine_level = total_caffeine
     # Residual_caffeine_level = input()
@@ -80,29 +139,8 @@ else:
     except ValueError:
         print('不正な値が入力されました: Invalid values entered.')
 
-    def calculator2(caffeine):
-        time_local = time_global
-        time_list = []
-        caffeine_list = []
-        
-        for i in range(caffeine):
-            time_list.append([time_local])
-            caffeine_list.append([caffeine])
-
-            time_local += 6
-            caffeine -= caffeine / 2
-
-
-            if caffeine < 5:
-                break
-        return time_list, caffeine_list
-
-
-
-if selected_mode == 1:
-    returned_list = calculator1(R_c_l)
-else:
     returned_list = calculator2(R_c_l)
+    
     
 print(returned_list[0])
 print(returned_list[1])
