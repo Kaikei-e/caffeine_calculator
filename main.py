@@ -42,7 +42,7 @@ def calculator(caffeine):
         time_list.append([time_local])
         caffeine_list.append([caffeine])
 
-        time_local += 6
+        time_local += 5
         caffeine -= caffeine / 2
 
 
