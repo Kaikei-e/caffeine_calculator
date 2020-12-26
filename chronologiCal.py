@@ -37,6 +37,7 @@ def chrono_excp_handler():
             print("An exception occurred.\nPlease enter the correct form.")
 
 def yon_excp_handler(y_o_n):
+    global chronological_stmt
     flag_yon = True
     while flag_yon == True:
         if y_o_n == "y" or y_o_n == "Y":
@@ -44,7 +45,7 @@ def yon_excp_handler(y_o_n):
             flag_yon = False
             return False
         elif y_o_n == "n" or y_o_n == "N":
-            flag_yon = True
+            print(chronological_stmt)
             return True
 
 
