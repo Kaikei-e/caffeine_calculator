@@ -58,6 +58,7 @@ def mode_excp_handler():
             if selected_mode < 1 or selected_mode > 2:
                 print("Please enter 1 or 2")
             elif selected_mode == 1 or selected_mode == 2:
+                return selected_mode
                 flag_mode = False
         except:
             print("An exception occurred.\nPlease enter 1 or 2.")
