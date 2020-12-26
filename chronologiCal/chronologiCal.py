@@ -3,6 +3,7 @@ import matplotlib.pyplot as ppt
 import datetime
 from funcs import excp_handler
 from funcs import caffe_cals
+from funcs import mode_selecter
 #sys.path.append('chronologiCal/funcs')
 
 selected_mode = None
@@ -41,61 +42,8 @@ def chronological_cal(datetimes):
         str_datetime = datetime.datetime.strftime(dt_l, '%Y/%m/%d %H:%M')
         print("Please select a calculation mode for this date and time.\n : {0}".format(str_datetime))
         selected_mode = excp_handler.mode_excp_handler()
-
-
-        """ 
-        Mode branching
-        """
-
-        if selected_mode == 1:
-
-            """
-
-            Mode 1
-            """
-            inputs = []
-            inputs = excp_handler.value_excp_handler1()
-
-            drink_amount = float(inputs[0])
-            caffe_per_100ml = float(inputs[1])
-            Residual_caffeine_level = drink_amount * caffe_per_100ml / 100
-
-            time_global = 0
-
-            try:
-                R_c_l = int(Residual_caffeine_level)
-            except ValueError:
-                print('不正な値が入力されました: Invalid values entered.')
-
-            returned_list = caffe_cals.calculator1(R_c_l, dt_l)
-            
-
-            
-
-
-        elif selected_mode == 2:
-
-            """
-            Mode 2
-            """
-            
-            value = excp_handler.value_excp_handler2()
-            total_caffeine = float(value)
-            Residual_caffeine_level = total_caffeine
-            # Residual_caffeine_level = input()
-
-            time_global = 0
-
-            try:
-                R_c_l = int(Residual_caffeine_level)
-            except ValueError:
-                print('不正な値が入力されました: Invalid values entered.')
-
-            returned_list = caffe_cals.calculator2(R_c_l)
-            
-            
-
-
+        caffe_amount = mode_selecter(selected_mode)
+        caffe_cals.calculator
 
 
 datetime_list = datetimes_loop(excp_handler.number_excp_handler())
