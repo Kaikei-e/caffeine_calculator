@@ -4,7 +4,6 @@ def calculator(caffeine, datetime):
         time_local = time_global
         time_list = []
         caffeine_list = []
-        
         for i in range(caffeine):
             time_list.append(datetime)
             caffeine_list.append(caffeine)

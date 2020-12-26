@@ -37,13 +37,13 @@ def datetimes_loop(N_o_D):
     return dt_list
 
 
-def chronological_cal(datetimes):
-    for dt_l in datetimes:
+def chronological_cal(datetime_list):
+    for dt_l in datetime_list:
         str_datetime = datetime.datetime.strftime(dt_l, '%Y/%m/%d %H:%M')
         print("Please select a calculation mode for this date and time.\n : {0}".format(str_datetime))
         selected_mode = excp_handler.mode_excp_handler()
-        caffe_amount = mode_selecter(selected_mode)
-        caffe_cals.calculator
+        caffe_amount = mode_selecter.mode_selecter(selected_mode)
+    caffe_cals.calculator(caffe_amount, dt_l)
 
 
 datetime_list = datetimes_loop(excp_handler.number_excp_handler())
