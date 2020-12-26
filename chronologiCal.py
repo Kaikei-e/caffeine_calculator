@@ -51,14 +51,20 @@ def yon_excp_handler(y_o_n):
 def datetimes_loop(N_o_D):
     global chronological_stmt
     dt_list = []
+    dt_l = None
+    def datetime_to_str(datetimes):
+        str_datetime = datetime.datetime.strftime(datetimes, '%Y/%m/%d %H:%M')
+        return str_datetime
     flag_datetimes = True
     print(chronological_stmt)
+
     while flag_datetimes == True:
         for i in range(N_o_D):
-            dt_list = chrono_excp_handler()
-        for i in range(dt_list):
-            print(dt_list[i])
-        print("\nIs this OK?\nEnter 'y' or 'n'.")
+            dt_list.append(chrono_excp_handler())
+
+        for dt_l in dt_list:
+            print(datetime_to_str(dt_l))
+        print("\nYou entered these.\nIs this OK?\nEnter 'y' or 'n'.")
         flag_datetimes = yon_excp_handler(input())
 
 
