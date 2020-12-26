@@ -68,6 +68,8 @@ def datetimes_loop(N_o_D):
         print("\nYou entered these.\nIs this OK?\nEnter 'y' or 'n'.")
         flag_datetimes = yon_excp_handler(input())
 
+    return dt_list
+
 
 
 def mode_excp_handler():
@@ -86,7 +88,9 @@ def mode_excp_handler():
             print("An exception occurred.\nPlease enter 1 or 2.")
 
 
-datetimes_loop(number_excp_handler())
+datetime_list = datetimes_loop(number_excp_handler())
+datetime_list = sorted(datetime_list)
+
 
 
 """
