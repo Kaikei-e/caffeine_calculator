@@ -1,5 +1,8 @@
+import sys
 import matplotlib.pyplot as ppt
 import datetime
+import chronologiCal.funcs
+#sys.path.append('chronologiCal/funcs')
 
 chronological_stmt = "Please enter multiple drinks in chronological order. The order can be in any order. The format should be 'YYYY/MM/DD H:M', such as '2020/12/01 21:34'."
 check_drinks_stmt = "How many drinks do you want to calculate?"
@@ -9,45 +12,6 @@ mode2_statement = "Enter the total amount of caffeine in mg."
 
 #drinks_list = []
 selected_mode = None
-
-def number_excp_handler():
-    flag_number = True
-    print(check_drinks_stmt)
-    while flag_number == True:
-        try:
-            number_of_drinks = int(input())
-            if number_of_drinks < 1:
-                print("Enter an integer greater than or equal to 1.")
-            elif number_of_drinks > 0:
-                flag_number = False
-            return number_of_drinks
-        except:
-            print("An exception occurred.\nPlease enter integer.")
-
-def chrono_excp_handler():
-    flag_chrono = True
-    #print(chronological_stmt)
-    while flag_chrono == True:
-        try:
-            datetimes = input()
-            dts = datetime.datetime.strptime(datetimes,'%Y/%m/%d %H:%M')
-            flag_chrono = False
-            return dts
-        except:
-            print("An exception occurred.\nPlease enter the correct form.")
-
-def yon_excp_handler(y_o_n):
-    global chronological_stmt
-    flag_yon = True
-    while flag_yon == True:
-        if y_o_n == "y" or y_o_n == "Y":
-            print("Ready to go!")
-            flag_yon = False
-            return False
-        elif y_o_n == "n" or y_o_n == "N":
-            print(chronological_stmt)
-            return True
-
 
 def datetimes_loop(N_o_D):
     global chronological_stmt
@@ -70,8 +34,6 @@ def datetimes_loop(N_o_D):
 
     return dt_list
 
-
-
 def mode_excp_handler():
     flag_mode = True
     global selected_mode
@@ -87,10 +49,140 @@ def mode_excp_handler():
         except:
             print("An exception occurred.\nPlease enter 1 or 2.")
 
+def value_excp_handler1():
+    flag_value = True
+
+    while flag_value == True:
+        print(mode1_statement)
+        s = input().rstrip().split()
+
+        try:
+            s[0] = float(s[0])
+            s[1] = float(s[1])
+            flag_value = False
+        except:
+            print("Please enter a number, not a string.")
+
+    return s
+
+def value_excp_handler2():
+    flag_value = True
+
+    while flag_value == True:
+        print(mode2_statement)
+        s = input()
+        try:
+            s = float(s)
+            flag_value = False
+        except:
+            print("Please enter a number, not a string.")
+
+    return s
+
+def calculator1(caffeine):
+        time_local = time_global
+        time_list = []
+        caffeine_list = []
+        
+        for i in range(caffeine):
+            time_list.append([time_local])
+            caffeine_list.append([caffeine])
+
+            time_local += 5
+            caffeine -= caffeine / 2
+
+
+            if caffeine < 5:
+                break
+        return time_list, caffeine_list
+
+def calculator2(caffeine):
+        time_local = time_global
+        time_list = []
+        caffeine_list = []
+        
+        for i in range(caffeine):
+            time_list.append([time_local])
+            caffeine_list.append([caffeine])
+
+            time_local += 5
+            caffeine -= caffeine / 2
+
+
+            if caffeine < 5:
+                break
+        return time_list, caffeine_list
+
+
+def chronological_cal(datetimes):
+    for dt_l in datetimes:
+        str_datetime = datetime.datetime.strftime(datetimes, '%Y/%m/%d %H:%M')
+        print("Please select a calculation mode for this date and time.\n : {0}".format(str_datetime))
+        mode_excp_handler()
+
+
+        """ 
+        Mode branching
+        """
+
+        if selected_mode == 1:
+
+            """
+
+            Mode 1
+            """
+
+            ##############
+            inputs = []
+            inputs = value_excp_handler1()
+
+            drink_amount = float(inputs[0])
+            caffe_per_100ml = float(inputs[1])
+            Residual_caffeine_level = drink_amount * caffe_per_100ml / 100
+
+            time_global = 0
+
+            try:
+                R_c_l = int(Residual_caffeine_level)
+            except ValueError:
+                print('不正な値が入力されました: Invalid values entered.')
+
+            returned_list = calculator1(R_c_l)
+            
+
+            
+
+
+        elif selected_mode == 2:
+
+            """
+            Mode 2
+            """
+            
+            value = value_excp_handler2()
+            ##############
+            total_caffeine = float(value)
+            Residual_caffeine_level = total_caffeine
+            # Residual_caffeine_level = input()
+
+            time_global = 0
+
+            try:
+                R_c_l = int(Residual_caffeine_level)
+            except ValueError:
+                print('不正な値が入力されました: Invalid values entered.')
+
+            returned_list = calculator2(R_c_l)
+            
+            
+
+
+
 
 datetime_list = datetimes_loop(number_excp_handler())
 datetime_list = sorted(datetime_list)
 
+chronological_cal(datetime_list)
 
 
 """
