@@ -43,6 +43,8 @@ def chronological_cal(datetime_list):
     returned_recaffe_list = []
     rest_of_caffe = 0
     returned_list = []
+    caffe_amount = 0
+    caffe_caled = 0
     for dt_l in datetime_list:
 
         index += 1
@@ -51,12 +53,18 @@ def chronological_cal(datetime_list):
         selected_mode = excp_handler.mode_excp_handler()
         caffe_amount = mode_selecter.mode_selecter(selected_mode)
         if index < len(datetime_list):
-            returned_list = caffe_cals.compare_calculator(caffe_amount, dt_l, datetime_list[index])
-            caffe_amount += returned_list[2]
+            re_list = caffe_cals.compare_calculator(caffe_amount, dt_l, datetime_list[index])
+            returned_list.insert(0, re_list[0])
+            returned_list.insert(1, re_list[1])
+            caffe_caled += returned_list[2]
             continue
 
         if index >= len(datetime_list) - 1:
-            returned_list = caffe_cals.simple_calculator(caffe_amount, dt_l)
+            caffe_caled += caffe_amount
+            re_list = caffe_cals.simple_calculator(caffe_caled, dt_l)
+            returned_list.insert(0, re_list[0])
+            returned_list.insert(1, re_list[1])
+
             continue
 
 

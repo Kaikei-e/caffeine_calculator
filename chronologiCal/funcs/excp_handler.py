@@ -45,6 +45,11 @@ def yon_excp_handler(y_o_n):
         elif y_o_n == "n" or y_o_n == "N":
             print(chronological_stmt)
             return True
+        elif y_o_n != "y" or y_o_n != "Y" or y_o_n != "n" or y_o_n != "N":
+            print("Please enter Y/n.")
+            y_o_n = input()
+
+        
 
 
 def mode_excp_handler():
