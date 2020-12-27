@@ -1,4 +1,5 @@
 import sys
+import pandas as pd
 import matplotlib.pyplot as ppt
 import datetime
 from funcs import excp_handler
@@ -39,8 +40,8 @@ def datetimes_loop(N_o_D):
 
 def chronological_cal(datetime_list):
     index = 0
-    returned_time_list = []
-    returned_recaffe_list = []
+    re_time_list = []
+    re_recaffe_list = []
     rest_of_caffe = 0
     returned_list = []
     caffe_amount = 0
@@ -86,9 +87,17 @@ def chronological_cal(datetime_list):
 
 datetime_list = datetimes_loop(excp_handler.number_excp_handler())
 datetime_list = sorted(datetime_list)
-
-print(chronological_cal(datetime_list))
-
+chrono_list = []
+chrono_list = chronological_cal(datetime_list)
+df = pd.DataFrame(chrono_list)
+len_df_cl = len(list(df.columns))
+for i in range(len_df_cl):
+    if i >= len(list(df.columns)):
+        break
+    elif i < len(list(df.columns)):
+        df = df[i] + df[i + 2]
+        df = df[i + 1] + df[i + 2]
+print(df)
     
 print(returned_list[0])
 print(returned_list[1])
@@ -97,4 +106,5 @@ ppt.xlabel("Time(h)")
 ppt.ylabel("Caffeine(mg)")
 ppt.grid()
 ppt.plot(returned_list[0], returned_list[1])
+
 
