@@ -38,12 +38,26 @@ def datetimes_loop(N_o_D):
 
 
 def chronological_cal(datetime_list):
+    index = 0
+    returned_time_list = []
+    returned_recaffe_list = []
+    rest_of_caffe = 0
+    returned_list = []
     for dt_l in datetime_list:
+
+        index += 1
         str_datetime = datetime.datetime.strftime(dt_l, '%Y/%m/%d %H:%M')
         print("Please select a calculation mode for this date and time.\n : {0}".format(str_datetime))
         selected_mode = excp_handler.mode_excp_handler()
         caffe_amount = mode_selecter.mode_selecter(selected_mode)
-    caffe_cals.calculator(caffe_amount, dt_l)
+        if index < len(datetime_list):
+            returned_list = caffe_cals.compare_calculator(caffe_amount, dt_l, datetime_list[index])
+            caffe_amount += returned_list[2]
+            continue
+
+        if index >= len(datetime_list) - 1:
+            returned_list = caffe_cals.simple_calculator(caffe_amount, dt_l)
+            continue
 
 
 datetime_list = datetimes_loop(excp_handler.number_excp_handler())
