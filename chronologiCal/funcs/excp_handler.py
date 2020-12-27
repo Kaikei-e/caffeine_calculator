@@ -22,6 +22,7 @@ def number_excp_handler():
         except:
             print("An exception occurred.\nPlease enter integer.")
 
+
 def chrono_excp_handler():
     flag_chrono = True
     #print(chronological_stmt)

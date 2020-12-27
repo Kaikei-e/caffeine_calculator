@@ -52,25 +52,36 @@ def chronological_cal(datetime_list):
         print("Please select a calculation mode for this date and time.\n : {0}".format(str_datetime))
         selected_mode = excp_handler.mode_excp_handler()
         caffe_amount = mode_selecter.mode_selecter(selected_mode)
-        if index < len(datetime_list):
+        if index == 1:
+            returned_list += caffe_cals.compare_calculator(caffe_amount, dt_l, datetime_list[index])
+            if len(returned_list) == 3:
+                caffe_caled += returned_list[2]
+                returned_list.pop(2)
+            
+            continue
+
+        elif index < len(datetime_list) and index > 1:
             #re_list = caffe_cals.compare_calculator(caffe_amount, dt_l, datetime_list[index])
             #returned_list.insert(0, re_list[0])
             #returned_list.insert(1, re_list[1])
             #caffe_caled += re_list[2]
-
-            returned_list += caffe_cals.compare_calculator(caffe_amount, dt_l, datetime_list[index])
-            caffe_caled += returned_list[2]
+            caffe_caled += caffe_amount
+            returned_list += caffe_cals.compare_calculator(caffe_caled, dt_l, datetime_list[index])
+            if (len(returned_list) - 1)  % 2 == 0:
+                caffe_caled = returned_list[index * 2]
+                returned_list.pop(index * 2)
+            
             continue
 
-        if index >= len(datetime_list) - 1:
+        elif index >= len(datetime_list) - 1:
             caffe_caled += caffe_amount
             #re_list = caffe_cals.simple_calculator(caffe_caled, dt_l)
             #returned_list.insert(0, re_list[0])
             #returned_list.insert(1, re_list[1])
 
             returned_list += caffe_cals.simple_calculator(caffe_caled, dt_l)
-            caffe_caled += returned_list[2]
             continue
+    return returned_list
 
 
 datetime_list = datetimes_loop(excp_handler.number_excp_handler())
