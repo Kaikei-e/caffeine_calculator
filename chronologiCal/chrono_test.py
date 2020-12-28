@@ -92,9 +92,20 @@ datetime_list = sorted(datetime_list)
 chrono_list = []
 chrono_list = chronological_cal(datetime_list)
 
+
+dttm_list = []
+caffe_list = []
+dttm_list, caffe_list = chronological_cal(datetime_list)
 #print(chronological_cal(datetime_list))
 #print(chrono_list)
 
+x1 = []
+for dttm in dttm_list:
+    dttm = "{%Y/%m/%d %H:%M}".format(dttm)
+    x1.append(dttm)
+    
+y1 = caffe_list
+"""
 
 df = pd.DataFrame(chrono_list)
 print(chrono_list)
@@ -112,9 +123,11 @@ dttm_fmt = dates.DateFormatter("%Y/%m/%d %H:%M")
 
 fig, ax = ppt.subplots()
 #x = pd.to_datetime(df[0], format="%Y/%m/%d %H:%M").to_list()
-x = np.array(df[0], dtype=np.datetime64)
+x = df[0].to_series().datetime.strftime("%Y/%m/%d %H:%M")
 y = df[1]
+"""
 
+"""
 ax.plot(x, y)
 ax.grid()
 
@@ -127,14 +140,14 @@ datetime_min = np.datetime64(x[0], '')
 datetime_max = min(x), max(x)
 ax.set_xlim(datetime_min, datetime_max)
 
-
+"""
 
 ppt.xlabel("Time(h)")
 ppt.ylabel("Caffeine(mg)")
-ppt.gca().xaxis.set_major_formatter(dates.DateFormatter("%Y/%m/%d %H:%M"))
-ppt.gca().xaxis.set_major_locator(dates.HourLocator())
+#ppt.gca().xaxis.set_major_formatter(dates.DateFormatter("%Y/%m/%d %H:%M"))
+#ppt.gca().xaxis.set_major_locator(dates.HourLocator())
 ppt.grid()
-ppt.plot(x, y)
+ppt.plot(x1, y1)
 ppt.gcf().autofmt_xdate()
 ppt.show()
 
