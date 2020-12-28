@@ -93,8 +93,8 @@ def chronological_cal(datetime_list):
 
 datetime_list = datetimes_loop(excp_handler.number_excp_handler())
 datetime_list = sorted(datetime_list)
-chrono_list = []
-chrono_list = chronological_cal(datetime_list)
+#chrono_list = []
+#chrono_list = chronological_cal(datetime_list)
 
 caffe_sum = 0
 dttm_list = []
@@ -116,6 +116,7 @@ for dttm in dttm_list:
 """ 
 y1 = caffe_list
 
+xticks_interval = 24
 ppt.xlabel("Time(h)")
 ppt.ylabel("Caffeine(mg)")
 #ppt.gca().xaxis.set_major_formatter(dates.DateFormatter("%Y/%m/%d %H:%M"))
@@ -125,5 +126,5 @@ ppt.plot(x1, y1)
 ppt.xlim(0, len(x1))
 ppt.ylim(0, caffe_sum)
 ppt.gcf().autofmt_xdate()
-ppt.xticks(np.arange(0, len(x1), 21), rotation=45)
+ppt.xticks(np.arange(0, len(x1), xticks_interval), rotation=45)
 ppt.show()
