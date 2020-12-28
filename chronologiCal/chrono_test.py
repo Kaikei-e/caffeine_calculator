@@ -1,8 +1,9 @@
 import sys
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as ppt
 import datetime
-from matplotlib.dates import DayLocator, HourLocator, DateFormatter, drange
+from matplotlib import dates
 
 from funcs import excp_handler
 from funcs import caffe_cals
@@ -95,36 +96,46 @@ chrono_list = chronological_cal(datetime_list)
 #print(chrono_list)
 
 
-
 df = pd.DataFrame(chrono_list)
 print(chrono_list)
 print(df.shape)
 
-df.rename(columns={"datetime": "datetime",
-    "caffeine": "caffeine" 
-    },
-    inplace=True)
+#x = df[0].astype('O')
+#y = df[1]
 
-x = df[0]
+
+
+days = dates.DayLocator()
+hours = dates.HourLocator()
+minutes = dates.MinuteLocator()
+dttm_fmt = dates.DateFormatter("%Y/%m/%d %H:%M")
+
+fig, ax = ppt.subplots()
+#x = pd.to_datetime(df[0], format="%Y/%m/%d %H:%M").to_list()
+x = np.array(df[0], dtype=np.datetime64)
 y = df[1]
-"""
-len_df_cl = len(list(df.columns))
-for i in range(len_df_cl):
-    if i >= len(list(df.columns)):
-        break
-    elif i < len(list(df.columns)):
-        df = df[i] + df[i + 2]
-        df = df[i + 1] + df[i + 2]
 
-"""
-    
-#print(df[0])
-#print(df[1])
+ax.plot(x, y)
+ax.grid()
+
+ax.xaxis.set_major_locator(days)
+ax.xaxis.set_minor_locator(hours)
+ax.xaxis.set_minor_locator(minutes)
+ax.xaxis.set_major_formatter(dttm_fmt)
+
+datetime_min = np.datetime64(x[0], '')
+datetime_max = min(x), max(x)
+ax.set_xlim(datetime_min, datetime_max)
+
+
 
 ppt.xlabel("Time(h)")
 ppt.ylabel("Caffeine(mg)")
+ppt.gca().xaxis.set_major_formatter(dates.DateFormatter("%Y/%m/%d %H:%M"))
+ppt.gca().xaxis.set_major_locator(dates.HourLocator())
 ppt.grid()
 ppt.plot(x, y)
-
+ppt.gcf().autofmt_xdate()
 ppt.show()
+
 
