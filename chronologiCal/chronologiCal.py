@@ -52,40 +52,58 @@ def chronological_cal(datetime_list):
     returned_list = []
     caffe_amount = 0
     caffe_caled = 0
-    for dt_l in datetime_list:
 
-        index += 1
-        str_datetime = datetime.datetime.strftime(dt_l, '%Y/%m/%d %H:%M')
+    if len(datetime_list) == 1:
+        str_datetime = datetime.datetime.strftime(datetime_list[0], '%Y/%m/%d %H:%M')
         print("Please select a calculation mode for this date and time.\n : {0}".format(str_datetime))
         selected_mode = excp_handler.mode_excp_handler()
         caffe_amount = mode_selecter.mode_selecter(selected_mode)
-        if index == 1:
-            re_time_list, re_recaffe_list, rest_of_caffe = caffe_cals.compare_calculator(caffe_amount, dt_l, datetime_list[index])
-            R_T_L.extend(re_time_list)
-            R_R_L.extend(re_recaffe_list)
-            caffe_caled += rest_of_caffe
-            caffe_sum += rest_of_caffe
+        re_time_list, re_recaffe_list = caffe_cals.simple_calculator(caffe_amount, datetime_list[0])
+
+        R_T_L.extend(re_time_list)
+        R_R_L.extend(re_recaffe_list)
+
+        return R_T_L, R_R_L, caffe_sum
+
+    else:
             
-            continue
 
-        elif index < len(datetime_list) and index > 1:
-            caffe_caled += caffe_amount
-            re_time_list, re_recaffe_list, rest_of_caffe = caffe_cals.compare_calculator(caffe_caled, dt_l, datetime_list[index])
-            R_T_L.extend(re_time_list)
-            R_R_L.extend(re_recaffe_list)
-            caffe_caled = rest_of_caffe
-            caffe_sum += rest_of_caffe
+        for dt_l in datetime_list:
+            if len(datetime_list) == 1:
+                break
 
-            continue
+            index += 1
+            str_datetime = datetime.datetime.strftime(dt_l, '%Y/%m/%d %H:%M')
+            print("Please select a calculation mode for this date and time.\n : {0}".format(str_datetime))
+            selected_mode = excp_handler.mode_excp_handler()
+            caffe_amount = mode_selecter.mode_selecter(selected_mode)
+            if index == 1:
+                re_time_list, re_recaffe_list, rest_of_caffe = caffe_cals.compare_calculator(caffe_amount, dt_l, datetime_list[index])
+                R_T_L.extend(re_time_list)
+                R_R_L.extend(re_recaffe_list)
+                caffe_caled += rest_of_caffe
+                caffe_sum += rest_of_caffe
+                
+                continue
 
-        elif index >= len(datetime_list) - 1:
-            caffe_caled += caffe_amount
-            caffe_sum += rest_of_caffe
-            re_time_list, re_recaffe_list = caffe_cals.simple_calculator(caffe_caled, dt_l)
-            R_T_L.extend(re_time_list)
-            R_R_L.extend(re_recaffe_list)
-            
-            continue
+            elif index < len(datetime_list) and index > 1:
+                caffe_caled += caffe_amount
+                re_time_list, re_recaffe_list, rest_of_caffe = caffe_cals.compare_calculator(caffe_caled, dt_l, datetime_list[index])
+                R_T_L.extend(re_time_list)
+                R_R_L.extend(re_recaffe_list)
+                caffe_caled = rest_of_caffe
+                caffe_sum += rest_of_caffe
+
+                continue
+
+            elif index >= len(datetime_list) - 1:
+                caffe_caled += caffe_amount
+                caffe_sum += rest_of_caffe
+                re_time_list, re_recaffe_list = caffe_cals.simple_calculator(caffe_caled, dt_l)
+                R_T_L.extend(re_time_list)
+                R_R_L.extend(re_recaffe_list)
+                
+                continue
 
     return R_T_L, R_R_L, caffe_sum
 
@@ -93,6 +111,7 @@ def chronological_cal(datetime_list):
 
 datetime_list = datetimes_loop(excp_handler.number_excp_handler())
 datetime_list = sorted(datetime_list)
+
 #chrono_list = []
 #chrono_list = chronological_cal(datetime_list)
 
@@ -128,3 +147,4 @@ ppt.ylim(0, caffe_sum)
 ppt.gcf().autofmt_xdate()
 ppt.xticks(np.arange(0, len(x1), xticks_interval), rotation=45)
 ppt.show()
+
