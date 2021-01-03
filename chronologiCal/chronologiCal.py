@@ -33,7 +33,7 @@ def datetimes_loop(N_o_D):
         for i in range(N_o_D):
             dt_list.append(excp_handler.chrono_excp_handler())
         print("Formatted.")
-        print("You entered these.\nIs this OK?\nEnter 'y' or 'n'.")
+        print("You entered these.\nIs this OK?\nEnter 'y' or 'N'.")
         for dt_l in dt_list:
             print(datetime_to_str(dt_l))
         flag_datetimes = excp_handler.yon_excp_handler(input())
