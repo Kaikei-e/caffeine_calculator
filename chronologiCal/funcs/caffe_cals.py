@@ -8,7 +8,7 @@ def compare_calculator(caffeine, datetime1, datetime2):
         caffeine_list = []
         caffeine = int(caffeine)
 
-        for i in range(caffeine):
+        for i in range(500):
             if datetime1 >= datetime2:
                 break
             
@@ -30,7 +30,7 @@ def simple_calculator(caffeine, datetime1):
     caffeine_list = []
     caffeine = int(caffeine)
     
-    for i in range(caffeine):
+    for i in range(500):
         time_list.append(datetime1)
         caffeine_list.append(caffeine)
 
