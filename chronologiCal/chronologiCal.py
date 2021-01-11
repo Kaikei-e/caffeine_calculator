@@ -52,6 +52,7 @@ def chronological_cal(datetime_list):
     returned_list = []
     caffe_amount = 0
     caffe_caled = 0
+    caffe_total = 0
 
     if len(datetime_list) == 1:
         str_datetime = datetime.datetime.strftime(datetime_list[0], '%Y/%m/%d %H:%M')
