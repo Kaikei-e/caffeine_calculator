@@ -16,8 +16,10 @@ def number_excp_handler():
             number_of_drinks = int(input())
             if number_of_drinks < 1:
                 print("Enter an integer greater than or equal to 1.")
+                continue
             elif number_of_drinks > 0:
                 flag_number = False
+
             return number_of_drinks
         except:
             print("An exception occurred.\nPlease enter integer.")
